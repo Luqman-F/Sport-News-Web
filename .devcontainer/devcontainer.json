@@ -19,7 +19,7 @@
 	// Configure tool-specific properties.
 	"customizations": {
         "vscode": {
-            "extentions": [
+            "extensions": [
                 "GitHub.copilot",
                 "onecentlin.laravel-extension-pack",
                 "mtxr.sqltools",
