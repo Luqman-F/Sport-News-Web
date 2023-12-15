@@ -1,6 +1,10 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\View;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,8 +17,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+// routes/web.php
+Route::get('/admin', function () {
+    return View('admin.dashboard');
+});
+Route::get('/admin/articles', function () {
+    return View('admin.articles');
 });
 Route::get('login', 'AuthController@login')->name('login');
 Route::get('register', 'AuthController@register')->name('register');
