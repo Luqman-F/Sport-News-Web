@@ -18,9 +18,8 @@ class PostController extends Controller
 
     function search()
     {
-        $search = request('search');
+        $search = request('q');
         $posts = Post::where('title', 'like', "%$search%")->paginate(10);
-
         return view('posts.index', compact('posts'));
     }
 

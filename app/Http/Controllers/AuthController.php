@@ -24,7 +24,7 @@ class AuthController extends Controller
             if (auth()->user()->role_id == 2) {
                 return redirect('/journalist');
             } else if (auth()->user()->role_id == 3) {
-                return redirect('/admin');
+                return redirect()->route('admin');
             }
 
             return redirect('/');

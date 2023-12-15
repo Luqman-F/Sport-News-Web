@@ -23,8 +23,7 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             UserSeeder::class,
             // TagSeeder::class,
-            // PostSeeder::class,
-            // PostTagSeeder::class,
+            PostSeeder::class,
         ]);
     }
 }
