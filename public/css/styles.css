@@ -40,3 +40,23 @@ body {
 .sidebar {
     background-color: #392F5A;
 }
+
+.main {
+    height: 100vh;
+}
+
+.sidebar-item {
+    display: block;
+    color: white;
+    width: 100%;
+    padding: 1em;
+    border-bottom: solid white;
+}
+
+.vh-20 {
+    height: 10vh;
+}
+
+.vh-80 {
+    height: 90vh;
+}

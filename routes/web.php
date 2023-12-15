@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\View;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,3 +26,18 @@ Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->na
 Route::post('/register', [RegisterController::class, 'register']);
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/admin', function () {
+    return View('admin.dashboard');
+});
+Route::get('/admin/articles', function () {
+    return View('admin.articles');
+});
+Route::get('/admin/users', function () {
+    return View('admin.users');
+});
+Route::get('/journalist', function () {
+    return View('journalist.dashboard');
+});
+Route::get('/journalist/articles', function () {
+    return View('journalist.articles');
+});

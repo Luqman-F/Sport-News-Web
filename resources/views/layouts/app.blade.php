@@ -8,10 +8,6 @@
     <title>SPORT NEWS ARTICLE</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <style>
-        /* Gaya tambahan untuk menyesuaikan warna dan tata letak */
-        body {
-            background-color: #FFF8F0;
-        }
 
         .navbar {
             background-color: #FFF8F0;
@@ -46,6 +42,7 @@
             margin-bottom: 20px;
             background-color: #D9D9D9;
             border: 1px solid #000;
+            border-radius: .5em;
             padding: 15px;
         }
 
@@ -69,7 +66,7 @@
 
     <header class="container-fluid navbar">
         <div class="container">
-            <div class="row">
+            <div class="row w-100">
                 <div class="col-6 py-3 d-flex align-items-center">
                     <img src="{{ asset('images/sports.png') }}" alt="Logo" width="100">
                     <h1 class="display-5">SPORT NEWS ARTICLE</h1>

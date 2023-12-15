@@ -1,82 +1,90 @@
 <!-- resources/views/auth/login.blade.php -->
 
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #F4D06F;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
 
-@section('content')
-<body>
-<style>
-    /* Style the body */
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #f2f2f2;
-    }
+        .login-container {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 50px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
 
-    /* Style the login form */
-    #login-form {
-        width: 360px;
-        margin: 80px auto;
-        padding: 30px;
-        background-color: #ffffff;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-    }
+        h2 {
+            color: #F4D06F;
+        }
 
-    /* Style the login form text input */
-    #login-form input[type="text"],
-    #login-form input[type="password"] {
-        width: 100%;
-        padding: 12px 20px;
-        margin: 8px 0;
-        display: inline-block;
-        border: 1px solid #ccc;
-        box-sizing: border-box;
-        outline: none;
-    }
+        .card-body {
+        padding: 40px;
+        }
 
-    /* Style the login form submit button */
-    #login-form input[type="submit"] {
-        width: 100%;
-        padding: 12px 20px;
-        margin: 8px 0;
-        background-color: #4CAF50;
-        color: white;
-        border: none;
-        cursor: pointer;
-        font-size: 16px;
-    }
+        .card-body-content {
+        font-size: 20px; 
+        color: #333; 
+        }
 
-    /* Style the login form submit button on hover */
-    #login-form input[type="submit"]:hover {
-        background-color: #45a049;
-    }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+        }
 
-    /* Style the login form checkbox */
-    #login-form input[type="checkbox"] {
-        margin-bottom: 10px;
-    }
+        button {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            border: 1px solid #F4D06F;
+            border-radius: 4px;
+        }
 
-    /* Style the login form label */
-    #login-form label {
-        font-size: 14px;
-        color: #555;
-    }
-</style>
-</body>
-<div class="container mt-4">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+        button[type="submit"] {
+            background-color: #F4D06F;
+            color: white;
+            cursor: pointer;
+            border: none;
+        }
 
+        button[type="submit"]:hover {
+            background-color: #2980b9;
+        }
+
+        .error {
+            color: #e74c3c;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+    </style>
+    </head>
+
+    <body>
+    <div class="login-container">
+        <h2>LOGIN</h2>
                 <div class="card-body">
+                <div class="card-body-content">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
                         <div class="mb-3">
-                            <label for="email" class="form-label">{{ __('E-mail Address') }}</label>
-                            <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
+                            <label for="username" class="form-label">{{ __('Username') }}</label>
+                            <input id="username" type="username" class="form-control" name="username" value="{{ old('username') }}" required autofocus>
                         </div>
 
                         <div class="mb-3">
@@ -84,10 +92,6 @@
                             <input id="password" type="password" class="form-control" name="password" required>
                         </div>
 
-                        <div class="mb-3 form-check">
-                            <input type="checkbox" class="form-check-input" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-                            <label class="form-check-label" for="remember">{{ __('Remember Me') }}</label>
-                        </div>
 
                         <button type="submit" class="btn btn-primary">{{ __('Login') }}</button>
 
@@ -102,4 +106,9 @@
         </div>
     </div>
 </div>
-@endsection
+</body>
+</html>
+
+
+
+

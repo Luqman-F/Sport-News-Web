@@ -4,11 +4,13 @@
 @section('content')
         <!-- Headline Artikel -->
         <div class="row">
-            <div class="col-12">
-                <div class="article">
+            <div class="article">
+            <div class="col-6">
+                <h2 class="mt-2">Judul Artikel Headline</h2>
+                <p>Ringkasan artikel headline...</p>
+</div>
+<div class="col-6">
                     <img src="https://via.placeholder.com/800x400" class="img-fluid" alt="Headline Artikel">
-                    <h2 class="mt-2">Judul Artikel Headline</h2>
-                    <p>Ringkasan artikel headline...</p>
                 </div>
             </div>
         </div>
