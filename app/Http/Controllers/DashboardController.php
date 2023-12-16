@@ -42,7 +42,7 @@ class DashboardController extends Controller
             ];
         })->sortByDesc('views');
 
-        return view('dashboard.admin.home', compact(
+        return view('admin.dashboard', ["data" => compact(
             'postCount',
             'averagePostViews',
             'averageComments',
@@ -50,14 +50,14 @@ class DashboardController extends Controller
             'authorCount',
             'averageAuthorPosts',
             'viewPerTag'
-        ));
+        )]);
     }
 
-    function manageAuthor()
+    function manageJournalist()
     {
-        $author = User::where('role_id', 2)->get();
+        $authors = User::where('role_id', 2)->get();
 
-        return view('dashboard.admin.manage-author', compact('author'));
+        return view('admin.journalist', compact('authors'));
     }
 
     function addAuthor()
@@ -81,16 +81,40 @@ class DashboardController extends Controller
     {
         $author->delete();
 
-        return redirect('/dashboard/admin/manage-author');
+        return redirect()->back(200);
     }
 
     function managePost()
     {
-        $post = Post::all();
+        $posts = Post::all();
 
-        return view('dashboard.admin.manage-post', compact('post'));
+        return view('admin.post', compact('posts'));
     }
 
 
     // Journalist
+    function journalistHome()
+    {
+        // Posts aggregation
+        $post = Post::where('author_id', auth()->user()->id)->get();
+        $postCount = $post->count();
+        $averagePostViews = $post->avg('views');
+
+        $recentComments = $post->map(function ($a) {
+            return $a->comments()->orderBy('created_at', 'desc')->first();
+        })->sortByDesc('created_at')->take(5);
+
+        return view('journalist.dashboard', ["data"=>compact(
+            'postCount',
+            'averagePostViews',
+            'recentComments'
+        )]);
+    }
+
+    function journalistPost()
+    {
+        $posts = Post::where('author_id', auth()->user()->id)->get();
+
+        return view('journalist.articles', compact('posts'));
+    }
 }

@@ -36,8 +36,8 @@
         }
 
         .card-body-content {
-        font-size: 20px; 
-        color: #333; 
+        font-size: 20px;
+        color: #333;
         }
 
         label {
@@ -83,8 +83,8 @@
                         @csrf
 
                         <div class="mb-3">
-                            <label for="username" class="form-label">{{ __('Username') }}</label>
-                            <input id="username" type="username" class="form-control" name="username" value="{{ old('username') }}" required autofocus>
+                            <label for="email" class="form-label">{{ __('Email') }}</label>
+                            <input id="email" type="email" class="form-control" name="email" value="{{ old('username') }}" required autofocus>
                         </div>
 
                         <div class="mb-3">

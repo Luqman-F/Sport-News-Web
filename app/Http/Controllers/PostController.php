@@ -13,19 +13,34 @@ class PostController extends Controller
         $popularPosts = Post::orderBy('views', 'desc')->take(5)->get();
         $posts = Post::latest()->paginate(5);
 
-        return view('posts.index', compact('posts', 'popularPosts', 'newPosts'));
+        return view('home', compact('posts', 'popularPosts', 'newPosts'));
     }
 
     function search()
     {
         $search = request('q');
         $posts = Post::where('title', 'like', "%$search%")->paginate(10);
-        return view('posts.index', compact('posts'));
+        return view('search', compact('posts'));
     }
 
-    function show(Post $post)
+    static function addViewsCounter(Post $post)
     {
-        return view('posts.show', compact('post'));
+        $postId = $post->id;
+
+        if (!session()->has("visited_posts.$postId")) {
+            $post->update([
+                'views' => $post->views + 1,
+            ]);
+
+            session()->put("visited_posts.$postId", true);
+        }
+    }
+
+    function show($slug)
+    {
+        $post = Post::where('slug', $slug)->firstOrFail();
+        $this::addViewsCounter($post);
+        return view('post', compact('post'));
     }
 
     function create()
@@ -96,19 +111,6 @@ class PostController extends Controller
         return redirect('/posts/' . $post->id);
     }
 
-    function addViewsCounter(Post $post)
-    {
-        $postId = $post->id;
 
-        if (!session()->has("visited_posts.$postId")) {
-            $post->update([
-                'views' => $post->views + 1,
-            ]);
-
-            session()->put("visited_posts.$postId", true);
-        }
-
-        return redirect('/posts/' . $post->id);
-    }
 
 }

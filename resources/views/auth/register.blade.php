@@ -36,8 +36,8 @@
         }
 
         .card-body-content {
-        font-size: 20px; 
-        color: #333; 
+        font-size: 20px;
+        color: #333;
         }
 
         label {
@@ -82,8 +82,8 @@
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
                             <div class="mb-3">
-                                <label for="username" class="form-label">{{ __('Username') }}</label>
-                                <input id="username" type="text" class="form-control" name="username" value="{{ old('username') }}" required autofocus>
+                                <label for="name" class="form-label">{{ __('Username') }}</label>
+                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
                             </div>
 
                             <div class="mb-3">

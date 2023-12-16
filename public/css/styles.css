@@ -60,3 +60,26 @@ body {
 .vh-80 {
     height: 90vh;
 }
+a.article-link {
+    text-decoration: none;
+    color: black;
+    border: none;
+}
+.article .row {
+    margin-bottom: 10px;
+}
+.side-item {
+    display: block;
+    color: black;
+    font-weight: bold;
+    width: 100%;
+    padding: 1em;
+    border-bottom: solid white !important;
+}
+
+.popular {
+    padding: 2px;
+    width: fit-content;
+    border-bottom: 4px solid #FF8811;
+}
+

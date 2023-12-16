@@ -13,6 +13,7 @@ class Post extends Model
         'title',
         'body',
         'author_id',
+        'views',
     ];
 
     function author()
