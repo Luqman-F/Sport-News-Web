@@ -16,11 +16,16 @@ class PostFactory extends Factory
      */
     public function definition(): array
     {
+        $body = "";
+        for ($i = 0; $i < rand(3, 6); $i++) {
+            $body .= "<p>" . $this->faker->paragraph(rand(3, 6)) . "</p>";
+        }
+
         return [
             "author_id" => \App\Models\User::where('role_id', 2)->get()->random()->id,
             "title" => $this->faker->sentence(),
             "slug" => $this->faker->slug(),
-            "body" => $this->faker->paragraph(),
+            "body" => $body,
             "views" => $this->faker->numberBetween(0, 100),
         ];
     }

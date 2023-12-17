@@ -83,3 +83,18 @@ a.article-link {
     border-bottom: 4px solid #FF8811;
 }
 
+.article-info {
+    margin-top: .5rem;
+    margin-bottom: 1rem;
+    font-size: 12px;
+}
+
+.article-info-item {
+    display: inline;
+    margin-right: 10px;
+}
+
+textarea {
+    resize: none;
+}
+

@@ -45,23 +45,29 @@ class PostController extends Controller
 
     function create()
     {
-        return view('posts.create');
+        return view('editor');
     }
 
     function store()
     {
+        // return response(json_encode([request()->all(), auth()->check()]), 200);
         $post = Post::create([
             'title' => request('title'),
             'body' => request('body'),
-            'author_id' => auth()->user()->id,
+            'author_id' => request('id'),
         ]);
 
-        return redirect('/posts/' . $post->id);
+        return response('article saved', 200);
     }
 
     function edit(Post $post)
     {
-        return view('posts.edit', compact('post'));
+        $data = [
+            'id' => $post->id,
+            'title' => $post->title,
+            'body' => $post->body,
+        ];
+        return view('editor', compact('data'));
     }
 
     function update(Post $post)
@@ -71,23 +77,26 @@ class PostController extends Controller
             'body' => request('body'),
         ]);
 
-        return redirect('/posts/' . $post->id);
+        return response('article updated', 200);
     }
 
     function destroy(Post $post)
     {
         $post->delete();
-        return redirect('/posts');
+        return redirect()->back()->with('success', 'Post deleted successfully');
     }
 
     function addComment(Post $post)
     {
+        $this->validate(request(), [
+            'body' => 'required',
+        ]);
         $post->comments()->create([
             'body' => request('body'),
             'user_id' => auth()->user()->id,
         ]);
 
-        return redirect('/posts/' . $post->id);
+        return redirect()->back()->with('success', 'Comment added successfully');
     }
 
     function addTag(Post $post)

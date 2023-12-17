@@ -16,7 +16,7 @@ class DashboardController extends Controller
         // Posts aggregation
         $post = Post::all();
         $postCount = $post->count();
-        $averagePostViews = $post->avg('views');
+        $averagePostViews = round($post->avg('views'), 2);
         $averageComments = $post->avg(function ($a) {
             return $a->comments()->count();
         });
@@ -32,6 +32,7 @@ class DashboardController extends Controller
         $averageAuthorPosts = $author->avg(function ($a) {
             return $a->posts()->count();
         });
+        $averageAuthorPosts = round($averageAuthorPosts, 2);
 
         // Tags aggregation
         $tag = Tag::all();
@@ -55,9 +56,9 @@ class DashboardController extends Controller
 
     function manageJournalist()
     {
-        $authors = User::where('role_id', 2)->get();
+        $journalist = User::where('role_id', 2)->paginate(10);
 
-        return view('admin.journalist', compact('authors'));
+        return view('admin.journalist', compact('journalist'));
     }
 
     function addAuthor()
@@ -65,32 +66,36 @@ class DashboardController extends Controller
         return view('dashboard.admin.add-author');
     }
 
-    function storeAuthor()
+    function storeJournalist()
     {
-        $author = User::create([
+        $this->validate(request(), [
+            'name' => 'required',
+            'email' => 'required|unique:users',
+            'password' => 'required|confirmed'
+        ]);
+        $Journalist = User::create([
             'name' => request('name'),
             'email' => request('email'),
             'role_id' => 2,
             'password' => request('password'),
         ]);
 
-        return redirect('/dashboard/admin/manage-author');
+        return redirect()->back();
     }
 
-    function deleteAuthor(User $author)
+    function deleteJournalist(User $Journalist)
     {
-        $author->delete();
+        $Journalist->delete();
 
-        return redirect()->back(200);
+        return redirect()->back();
     }
 
     function managePost()
     {
-        $posts = Post::all();
+        $posts = Post::paginate(10);
 
         return view('admin.post', compact('posts'));
     }
-
 
     // Journalist
     function journalistHome()
@@ -98,7 +103,7 @@ class DashboardController extends Controller
         // Posts aggregation
         $post = Post::where('author_id', auth()->user()->id)->get();
         $postCount = $post->count();
-        $averagePostViews = $post->avg('views');
+        $averagePostViews = round($post->avg('views'), 2);
 
         $recentComments = $post->map(function ($a) {
             return $a->comments()->orderBy('created_at', 'desc')->first();
@@ -113,7 +118,7 @@ class DashboardController extends Controller
 
     function journalistPost()
     {
-        $posts = Post::where('author_id', auth()->user()->id)->get();
+        $posts = Post::where('author_id', auth()->user()->id)->latest()->paginate(10);
 
         return view('journalist.articles', compact('posts'));
     }

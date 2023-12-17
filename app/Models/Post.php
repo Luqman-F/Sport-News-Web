@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Post extends Model
 {
@@ -11,6 +12,7 @@ class Post extends Model
 
     protected $fillable=[
         'title',
+        'slug',
         'body',
         'author_id',
         'views',
@@ -30,4 +32,21 @@ class Post extends Model
     {
         return $this->belongsToMany(Tag::class);
     }
-}
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            $slug = Str::slug($model->title);
+            $originalSlug = $slug;
+            $count = 1;
+
+            while (static::where('slug', $slug)->exists()) {
+                $slug = $originalSlug . '-' . $count;
+                $count++;
+            }
+
+            $model->slug = $slug;
+        });
+    }}

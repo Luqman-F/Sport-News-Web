@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -26,13 +27,6 @@ class UserSeeder extends Seeder
         $journalistModel->role_id = \App\Models\Role::where('role_name', 'journalist')->first()->id;
         $journalistModel->save();
 
-        for ($i = 0; $i < 10; $i++) {
-            $userModel = new \App\Models\User();
-            $userModel->name = 'User ' . $i;
-            $userModel->email = 'user' . $i . '@example.com';
-            $userModel->password = \Illuminate\Support\Facades\Hash::make('password');
-            $userModel->role_id = \App\Models\Role::all()->random()->id;
-            $userModel->save();
-        }
+        User::factory(25)->create();
     }
 }

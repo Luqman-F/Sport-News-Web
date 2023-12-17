@@ -8,7 +8,7 @@
         <div class="row">
                 <div class="col-6">
                     <h2 class="mt-2">{{ $newPosts[0]['title'] }}</h2>
-                    <p>{{ Str::limit($newPosts[0]['body'], 150, '...') }}</p>
+                    <p>{!! Str::limit($newPosts[0]['body'], 150, '...') !!}</p>
                 </div>
                 <div class="col-6">
                     <img src="https://via.placeholder.com/800x400" class="img-fluid" alt="Headline Artikel">
@@ -30,6 +30,7 @@
                         </div>
                         <div class="col-8">
                             <h4 class="mt-2"> {{$post["title"]}} </h4>
+                            <p>{!! Str::limit($post['body'], 150, '...') !!}</p>
                         </div>
                     </div>
                 </a>
