@@ -9,7 +9,7 @@
                         {{ $post['title'] }}
                     </h5>
                     <p>
-                        {{ Str::limit($post['body'], 200, '...') }}
+                        {!! Str::limit($post['body'], 200, '...') !!}
                     </p>
                 </li>
             </a>
